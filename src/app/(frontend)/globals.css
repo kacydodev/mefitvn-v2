@@ -212,6 +212,9 @@
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
   }
+  .debug {
+    @apply [&_*]:border [&_*]:border-pink-300;
+  }
 }
 
 html {
