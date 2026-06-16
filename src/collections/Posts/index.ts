@@ -206,13 +206,13 @@ export const Posts: CollectionConfig<'posts'> = {
               type: 'row',
               fields: [
                 {
-                  name: 'entry',
+                  name: 'entryPriceInclusive',
                   label: 'Price includes entry fee',
                   type: 'checkbox',
                   defaultValue: false,
                 },
                 {
-                  name: 'gear',
+                  name: 'gearPriceInclusive',
                     label: 'Price includes gear rental',
                   type: 'checkbox',
                   defaultValue: false,

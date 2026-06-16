@@ -253,8 +253,8 @@ export interface Post {
   startTime: string;
   endTime?: string | null;
   priceVND: number;
-  entry?: boolean | null;
-  gear?: boolean | null;
+  entryPriceInclusive?: boolean | null;
+  gearPriceInclusive?: boolean | null;
   eventContent?: {
     root: {
       type: string;
@@ -1251,8 +1251,8 @@ export interface PostsSelect<T extends boolean = true> {
   startTime?: T;
   endTime?: T;
   priceVND?: T;
-  entry?: T;
-  gear?: T;
+  entryPriceInclusive?: T;
+  gearPriceInclusive?: T;
   eventContent?: T;
   relatedPosts?: T;
   categories?: T;

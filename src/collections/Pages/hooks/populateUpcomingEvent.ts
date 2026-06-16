@@ -5,23 +5,29 @@ export const populateUpcomingEvent: CollectionAfterReadHook = async ({ doc, req:
     try {
       const posts = await payload.find({
         collection: 'posts',
-        limit: 1,
-        sort: '-publishedAt',
         where: {
-          '_status': {
-            equals: 'published',
-          },
-          'categories.slug': {
-            in: ['news', 'News'],
-          },
+          and: [
+            {
+              type: {
+                equals: 'event',
+              },
+            },
+            {
+              eventDate: {
+                greater_than_equal: new Date().toISOString(),
+              },
+            },
+          ],
         },
+        sort: 'eventDate',
+        limit: 1,
       })
 
       if (posts.docs.length > 0) {
-        doc.hero.latestNews = posts.docs[0].id
+        doc.hero.upcomingEvent = posts.docs[0]
       }
     } catch (err) {
-      payload.logger.error(`Error populating latest news for hero: ${err}`)
+      payload.logger.error(`Error populating upcoming event for hero: ${err}`)
     }
   }
 

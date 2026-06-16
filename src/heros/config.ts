@@ -77,7 +77,6 @@ export const hero: Field = {
       relationTo: 'media',
       required: true,
     },
-
     {
       name: 'upcomingEvent',
       type: 'relationship',
@@ -86,6 +85,14 @@ export const hero: Field = {
         // readOnly: true,
       },
       relationTo: 'posts',
+      filterOptions: {
+        type: {
+          in: ['event'],
+        },
+        eventDate: {
+          greater_than_equal: new Date().toISOString(),
+        },
+      },
     },
     // {
     //   name: 'video',
