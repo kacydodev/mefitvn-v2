@@ -8,6 +8,7 @@ import {
 } from '@payloadcms/richtext-lexical'
 
 import { linkGroup } from '@/fields/linkGroup'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
 
 export const hero: Field = {
   name: 'hero',
@@ -67,6 +68,34 @@ export const hero: Field = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'background',
+      type: 'upload',
+      admin: {
+        condition: (_, { type } = {}) => ['highImpact'].includes(type),
+      },
+      relationTo: 'media',
+      required: true,
+    },
+
+    {
+      name: 'upcomingEvent',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
+        // readOnly: true,
+      },
+      relationTo: 'posts',
+    },
+    // {
+    //   name: 'video',
+    //   type: 'upload',
+    //   admin: {
+    //     condition: (_, { type } = {}) => ['highImpact'].includes(type),
+    //   },
+    //   relationTo: 'media',
+    //   required: false,
+    // },
   ],
   label: false,
 }

@@ -73,10 +73,21 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       type: 'relationship',
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'reference',
+        allowCreate: false,
       },
       label: 'Document to link to',
       relationTo: ['pages', 'posts'],
       required: true,
+      // filterOptions: ({ id, relationTo }) => {
+      //   if (id) {
+      //     return {
+      //       id: {
+      //         not_equals: id,
+      //       },
+      //     }
+      //   }
+      //   return true
+      // },
     },
     {
       name: 'url',

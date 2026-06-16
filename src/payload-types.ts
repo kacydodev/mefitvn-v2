@@ -70,6 +70,7 @@ export interface Config {
     pages: Page;
     posts: Post;
     media: Media;
+    locations: Location;
     categories: Category;
     users: User;
     redirects: Redirect;
@@ -92,6 +93,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    locations: LocationsSelect<false> | LocationsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
@@ -200,6 +202,8 @@ export interface Page {
         }[]
       | null;
     media?: (string | null) | Media;
+    background?: (string | null) | Media;
+    upcomingEvent?: (string | null) | Post;
   };
   layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
   meta?: {
@@ -227,6 +231,7 @@ export interface Page {
 export interface Post {
   id: string;
   title: string;
+  type?: ('blog' | 'event') | null;
   heroImage?: (string | null) | Media;
   content: {
     root: {
@@ -243,6 +248,28 @@ export interface Post {
     };
     [k: string]: unknown;
   };
+  eventDate: string;
+  location?: (string | null) | Location;
+  startTime: string;
+  endTime?: string | null;
+  priceVND: number;
+  entry?: boolean | null;
+  gear?: boolean | null;
+  eventContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -386,6 +413,22 @@ export interface FolderInterface {
     totalDocs?: number;
   };
   folderType?: 'media'[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations".
+ */
+export interface Location {
+  id: string;
+  title: string;
+  default?: boolean | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -984,6 +1027,10 @@ export interface PayloadLockedDocument {
         value: string | Media;
       } | null)
     | ({
+        relationTo: 'locations';
+        value: string | Location;
+      } | null)
+    | ({
         relationTo: 'categories';
         value: string | Category;
       } | null)
@@ -1080,6 +1127,8 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        background?: T;
+        upcomingEvent?: T;
       };
   layout?:
     | T
@@ -1194,8 +1243,17 @@ export interface FormBlockSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  type?: T;
   heroImage?: T;
   content?: T;
+  eventDate?: T;
+  location?: T;
+  startTime?: T;
+  endTime?: T;
+  priceVND?: T;
+  entry?: T;
+  gear?: T;
+  eventContent?: T;
   relatedPosts?: T;
   categories?: T;
   meta?:
@@ -1312,6 +1370,18 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations_select".
+ */
+export interface LocationsSelect<T extends boolean = true> {
+  title?: T;
+  default?: T;
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
