@@ -2,11 +2,11 @@
 @import '@payloadcms/ui/scss';
 @tailwind utilities;
 
-@layer utilities {
-.debug {
-  @apply [*_&]:border [*_&]:border-teal-300;
-}
-}
+//@layer utilities {
+//.debug {
+//  @apply [*_&]:border [*_&]:border-teal-300;
+//}
+//}
 
 .dashboard .before-dashboard {
   margin-bottom: base(1.5);
