@@ -7,8 +7,7 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
-import { format, formatDistance } from 'date-fns'
-import { Circle } from 'lucide-react'
+import { formatDistance } from 'date-fns'
 
 export const HighImpactHero: React.FC<Page['hero']> = ({
   links,
@@ -31,11 +30,13 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
       className='relative -mt-[8.5rem] flex items-center justify-center text-white'
       data-theme='dark'
     >
-      <div className='container z-10 relative flex items-center justify-center gap-24'>
-        <div className='max-w-[36.5rem] space-y-8 md:text-left [&_h1]:text-4xl'>
+      {/* <div className='container pt-[8.5rem] flex flex-col-reverse md:grid md:grid-cols-[2fr_1fr] gap-x-12 gap-y-8 items-center justify-center'> */}
+      {/* <div className='container pt-[8.5rem] flex flex-col-reverse md:grid md:grid-cols-[3fr_2fr] gap-x-12 gap-y-8 items-center *:place-self-center'> */}
+      <div className='container pt-[8.5rem] flex flex-col-reverse md:flex-row md:gap-x-12 lg:gap-x-24 gap-y-8 items-center justify-center'>
+        <div className='md:max-w-96 lg:max-w-146 space-y-8 md:text-left [&_h1]:text-4xl'>
           {richText && <RichText data={richText} enableGutter={false} />}
           {Array.isArray(links) && links.length > 0 && (
-            <ul className='flex md:justify-start gap-4'>
+            <ul className='self-center flex md:justify-start gap-4'>
               {links.map(({ link }, i) => {
                 return (
                   <li key={i}>
@@ -46,12 +47,12 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
             </ul>
           )}
           {/* Upcoming Event */}
-          <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-success text-sm italic'>
+          <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-success text-xs italic lg:text-sm debug'>
             <span className='bg-green-500 w-3 h-3 rounded-full'></span> {upcomingEvent?.title} in{' '}
             {eventDate}!
           </div>
         </div>
-        <Media resource={media} imgClassName='w-72 h-auto' />
+        <Media resource={media} className='w-72 h-auto' />
       </div>
 
       <div className='min-h-[80vh] select-none'>
