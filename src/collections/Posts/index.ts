@@ -9,12 +9,12 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
-import { authenticated } from '../../access/authenticated'
-import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { Banner } from '../../blocks/Banner/config'
-import { Code } from '../../blocks/Code/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
-import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { authenticated } from '@/access/authenticated'
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { Banner } from '@/blocks/Banner/config'
+import { Code } from '@/blocks/Code/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
 
@@ -71,24 +71,21 @@ export const Posts: CollectionConfig<'posts'> = {
       type: 'text',
       required: true,
     },
-    {
-      name: 'type',
-      type: 'radio',
-      defaultValue: 'blog',
-      options: [
-        {
-          label: 'Blog Post',
-          value: 'blog',
-        },
-        {
-          label: 'Upcoming Event',
-          value: 'event',
-        },
-      ],
-      // admin: {
-      //   position: 'sidebar',
-      // },
-    },
+    // {
+    //   name: 'type',
+    //   type: 'radio',
+    //   defaultValue: 'blog',
+    //   options: [
+    //     {
+    //       label: 'Blog Post',
+    //       value: 'blog',
+    //     },
+    //     {
+    //       label: 'Upcoming Event',
+    //       value: 'event',
+    //     },
+    //   ],
+    // },
     {
       type: 'tabs',
       tabs: [
@@ -119,125 +116,125 @@ export const Posts: CollectionConfig<'posts'> = {
             },
           ],
           label: 'Blog Content',
-          admin: {
-            condition: (data) => data?.type === 'blog',
-          },
+          // admin: {
+          //   condition: (data) => data?.type === 'blog',
+          // },
         },
-        {
-          label: 'Event Details',
-          admin: {
-            condition: (data) => data?.type === 'event',
-          },
-          fields: [
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'eventDate',
-                  type: 'date',
-                  required: true,
-                  defaultValue: () => new Date(),
-                  admin: {
-                    date: {
-                      pickerAppearance: 'dayOnly',
-                    },
-                  },
-                },
-                {
-                  name: 'location',
-                  type: 'relationship',
-                  required: true,
-                  relationTo: 'locations',
-                  defaultValue: async ({ req }) => {
-                    const defaultLocation = await req.payload.find({
-                      collection: 'locations',
-                      where: {
-                        default: {
-                          equals: true,
-                        },
-                      },
-                      limit: 1,
-                    })
-
-                    return defaultLocation?.docs?.[0]?.id || null
-                  },
-                  admin: {
-                    condition: (data) => data?.type === 'event',
-                  },
-                },
-              ],
-            },
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'startTime',
-                  type: 'date',
-                  required: true,
-                  defaultValue: () => new Date(),
-                  admin: {
-                    date: {
-                      pickerAppearance: 'timeOnly',
-                      displayFormat: 'HH:mm',
-                    },
-                    width: '50%',
-                  },
-                },
-                {
-                  name: 'endTime',
-                  type: 'date',
-                  admin: {
-                    date: {
-                      pickerAppearance: 'timeOnly',
-                      displayFormat: 'HH:mm',
-                    },
-                    width: '50%',
-                  },
-                },
-              ],
-            },
-            {
-              name: 'priceVND',
-              type: 'number',
-              label: 'Price (VND)',
-              required: true,
-            },
-            {
-              type: 'row',
-              fields: [
-                {
-                  name: 'entryPriceInclusive',
-                  label: 'Price includes entry fee',
-                  type: 'checkbox',
-                  defaultValue: false,
-                },
-                {
-                  name: 'gearPriceInclusive',
-                    label: 'Price includes gear rental',
-                  type: 'checkbox',
-                  defaultValue: false,
-                },
-              ],
-            },
-            {
-              name: 'eventContent',
-              type: 'richText',
-              label: 'Event Content',
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature(),
-                  ]
-                },
-              }),
-            },
-          ],
-        },
+        // {
+        //   label: 'Event Details',
+        //   admin: {
+        //     condition: (data) => data?.type === 'event',
+        //   },
+        //   fields: [
+        //     {
+        //       type: 'row',
+        //       fields: [
+        //         {
+        //           name: 'eventDate',
+        //           type: 'date',
+        //           required: true,
+        //           defaultValue: () => new Date(),
+        //           admin: {
+        //             date: {
+        //               pickerAppearance: 'dayOnly',
+        //             },
+        //           },
+        //         },
+        //         {
+        //           name: 'location',
+        //           type: 'relationship',
+        //           required: true,
+        //           relationTo: 'locations',
+        //           defaultValue: async ({ req }) => {
+        //             const defaultLocation = await req.payload.find({
+        //               collection: 'locations',
+        //               where: {
+        //                 default: {
+        //                   equals: true,
+        //                 },
+        //               },
+        //               limit: 1,
+        //             })
+        //
+        //             return defaultLocation?.docs?.[0]?.id || null
+        //           },
+        //           admin: {
+        //             condition: (data) => data?.type === 'event',
+        //           },
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       type: 'row',
+        //       fields: [
+        //         {
+        //           name: 'startTime',
+        //           type: 'date',
+        //           required: true,
+        //           defaultValue: () => new Date(),
+        //           admin: {
+        //             date: {
+        //               pickerAppearance: 'timeOnly',
+        //               displayFormat: 'HH:mm',
+        //             },
+        //             width: '50%',
+        //           },
+        //         },
+        //         {
+        //           name: 'endTime',
+        //           type: 'date',
+        //           admin: {
+        //             date: {
+        //               pickerAppearance: 'timeOnly',
+        //               displayFormat: 'HH:mm',
+        //             },
+        //             width: '50%',
+        //           },
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       name: 'priceVND',
+        //       type: 'number',
+        //       label: 'Price (VND)',
+        //       required: true,
+        //     },
+        //     {
+        //       type: 'row',
+        //       fields: [
+        //         {
+        //           name: 'entryPriceInclusive',
+        //           label: 'Price includes entry fee',
+        //           type: 'checkbox',
+        //           defaultValue: false,
+        //         },
+        //         {
+        //           name: 'gearPriceInclusive',
+        //             label: 'Price includes gear rental',
+        //           type: 'checkbox',
+        //           defaultValue: false,
+        //         },
+        //       ],
+        //     },
+        //     {
+        //       name: 'eventContent',
+        //       type: 'richText',
+        //       label: 'Event Content',
+        //       editor: lexicalEditor({
+        //         features: ({ rootFeatures }) => {
+        //           return [
+        //             ...rootFeatures,
+        //             HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+        //             BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
+        //             FixedToolbarFeature(),
+        //             InlineToolbarFeature(),
+        //             HorizontalRuleFeature(),
+        //           ]
+        //         },
+        //       }),
+        //     },
+        //   ],
+        // },
         {
           fields: [
             {

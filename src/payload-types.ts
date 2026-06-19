@@ -69,6 +69,7 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
+    events: Event;
     media: Media;
     locations: Location;
     categories: Category;
@@ -92,6 +93,7 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     locations: LocationsSelect<false> | LocationsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
@@ -231,7 +233,6 @@ export interface Page {
 export interface Post {
   id: string;
   title: string;
-  type?: ('blog' | 'event') | null;
   heroImage?: (string | null) | Media;
   content: {
     root: {
@@ -248,28 +249,6 @@ export interface Post {
     };
     [k: string]: unknown;
   };
-  eventDate: string;
-  location?: (string | null) | Location;
-  startTime: string;
-  endTime?: string | null;
-  priceVND: number;
-  entryPriceInclusive?: boolean | null;
-  gearPriceInclusive?: boolean | null;
-  eventContent?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
   meta?: {
@@ -413,22 +392,6 @@ export interface FolderInterface {
     totalDocs?: number;
   };
   folderType?: 'media'[] | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "locations".
- */
-export interface Location {
-  id: string;
-  title: string;
-  default?: boolean | null;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -827,6 +790,68 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: string;
+  title: string;
+  eventDate: string;
+  location?: (string | null) | Location;
+  startTime: string;
+  endTime?: string | null;
+  priceVND: number;
+  entryPriceInclusive?: boolean | null;
+  gearPriceInclusive?: boolean | null;
+  eventContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations".
+ */
+export interface Location {
+  id: string;
+  title: string;
+  default?: boolean | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1022,6 +1047,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'posts';
         value: string | Post;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: string | Event;
       } | null)
     | ({
         relationTo: 'media';
@@ -1244,17 +1273,8 @@ export interface FormBlockSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
-  type?: T;
   heroImage?: T;
   content?: T;
-  eventDate?: T;
-  location?: T;
-  startTime?: T;
-  endTime?: T;
-  priceVND?: T;
-  entryPriceInclusive?: T;
-  gearPriceInclusive?: T;
-  eventContent?: T;
   relatedPosts?: T;
   categories?: T;
   meta?:
@@ -1264,6 +1284,34 @@ export interface PostsSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
+  publishedAt?: T;
+  authors?: T;
+  populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  title?: T;
+  eventDate?: T;
+  location?: T;
+  startTime?: T;
+  endTime?: T;
+  priceVND?: T;
+  entryPriceInclusive?: T;
+  gearPriceInclusive?: T;
+  eventContent?: T;
   publishedAt?: T;
   authors?: T;
   populatedAuthors?:
@@ -1833,6 +1881,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'posts';
           value: string | Post;
+        } | null)
+      | ({
+          relationTo: 'events';
+          value: string | Event;
         } | null);
     global?: string | null;
     user?: (string | null) | User;
