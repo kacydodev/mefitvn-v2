@@ -1,32 +1,62 @@
 //@import 'tailwindcss';
 @import '@payloadcms/ui/scss';
-@tailwind utilities;
 
-//@layer utilities {
-//.debug {
-//  @apply [*_&]:border [*_&]:border-teal-300;
-//}
-//}
+:root {
+  --color-neutral-950: oklch(.145 0 0);
+  --color-neutral-800: oklch(.269 0 0);
+}
 
-.dashboard .before-dashboard {
-  margin-bottom: base(1.5);
+* {
+  box-sizing: border-box;
+}
 
-  &__banner {
-    & h4 {
-      margin: 0;
-    }
-  }
+body {
+  font-size: 14px;
+  margin: 0;
+}
 
-  &__instructions {
-    list-style: decimal;
-    margin-bottom: base(0.5);
-
-    & li {
-      width: 100%;
-    }
-  }
-
-  & a:hover {
-    opacity: 0.85;
+.debug {
+  * {
+    border: 1px solid cyan;
   }
 }
+
+.banner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+
+  h1 {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  img {
+    height: 48px;
+    width: auto;
+  }
+}
+
+.custom-widget {
+  padding: 1rem;
+  background: var(--color-neutral-800);
+
+  .post-count-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .post-count-content {
+    font-color: white;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    //grid-template-columns: repeat(2, 1fr 2fr);
+    grid-auto-rows: minmax(1fr, auto);
+    //grid-template-rows: repeat(auto-fit, 1fr);
+    //grid-template-rows: repeat(2, minmax(1fr, auto));
+    gap: 1rem;
+  }
+}
+

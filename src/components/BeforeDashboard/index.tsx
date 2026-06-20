@@ -9,9 +9,9 @@ const baseClass = 'before-dashboard'
 
 const BeforeDashboard = (props: AdminViewServerProps) => {
   return (
-    <div className='px-2 py-4 flex items-center gap-24'>
+    <div className='banner'>
       <AdminLogo />
-      <p className='text-lg'>Welcome to your dashboard, {props?.user?.name}!</p>
+      <h1 className=''>Welcome to your dashboard, {props?.user?.name}!</h1>
     </div>
   )
 

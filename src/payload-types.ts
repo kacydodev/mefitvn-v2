@@ -123,6 +123,7 @@ export interface Config {
   };
   locale: null;
   widgets: {
+    'posts-count': PostsCountWidget;
     collections: CollectionsWidget;
   };
   user: User;
@@ -1854,6 +1855,16 @@ export interface FooterSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts-count_widget".
+ */
+export interface PostsCountWidget {
+  data?: {
+    [k: string]: unknown;
+  };
+  width: 'x-small' | 'small' | 'medium';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

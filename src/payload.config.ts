@@ -37,6 +37,17 @@ export default buildConfig({
       // Feel free to delete this at any time. Simply remove the line below.
       beforeDashboard: ['@/components/BeforeDashboard'],
     },
+    dashboard: {
+      widgets: [
+        {
+          Component: '@/components/Widgets/PostsCount.tsx',
+          slug: 'posts-count',
+          label: 'Posts Count',
+          maxWidth: 'medium',
+          minWidth: 'x-small',
+        },
+      ],
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -69,6 +80,7 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URL || '',
   }),
+  blocks: [],
   collections: [Pages, Posts, Events, Media, Locations, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
