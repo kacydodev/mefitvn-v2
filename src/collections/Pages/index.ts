@@ -13,6 +13,7 @@ import { populatePublishedAt } from '@/hooks/populatePublishedAt'
 import { populateUpcomingEvent } from './hooks/populateUpcomingEvent'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import { ensureFirstPageTitle } from './hooks/ensureFirstPageTitle'
 
 import {
   MetaDescriptionField,
@@ -21,6 +22,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import { heroTwo } from '@/herosTwo/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -32,7 +34,8 @@ export const Pages: CollectionConfig<'pages'> = {
   },
   // This config controls what's populated by default when a page is referenced
   // https://payloadcms.com/docs/queries/select#defaultpopulate-collection-config-property
-  // Type safe if the collection slug generic is passed to `CollectionConfig` - `CollectionConfig<'pages'>
+  // Type safe if the collection slug generic is passed to `CollectionConfig` -
+  // `CollectionConfig <'pages'>
   defaultPopulate: {
     title: true,
     slug: true,
@@ -64,9 +67,13 @@ export const Pages: CollectionConfig<'pages'> = {
     {
       type: 'tabs',
       tabs: [
+        // {
+        //   fields: [hero],
+        //   label: 'Hero',
+        // },
         {
-          fields: [hero],
-          label: 'Hero',
+          fields: [heroTwo],
+          label: 'Hero Two',
         },
         {
           fields: [
@@ -121,6 +128,7 @@ export const Pages: CollectionConfig<'pages'> = {
     slugField(),
   ],
   hooks: {
+    beforeValidate: [ensureFirstPageTitle],
     afterChange: [revalidatePage],
     afterRead: [populateUpcomingEvent],
     beforeChange: [populatePublishedAt],

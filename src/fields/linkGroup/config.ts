@@ -21,6 +21,9 @@ export const linkGroup: LinkGroupType = ({ appearances, overrides = {} } = {}) =
     ],
     admin: {
       initCollapsed: true,
+      components: {
+        RowLabel
+      }
     },
   }
 

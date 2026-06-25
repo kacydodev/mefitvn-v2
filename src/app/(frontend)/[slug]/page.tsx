@@ -12,6 +12,7 @@ import { RenderHero } from '@/heros/RenderHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
+import HerosTwo from '@/herosTwo'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -53,6 +54,7 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   page = await queryPageBySlug({
     slug: decodedSlug,
+    limit: 1,
   })
 
   // Remove this code once your website is seeded
@@ -64,7 +66,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <PayloadRedirects url={url} />
   }
 
-  const { hero, layout } = page
+  const { heroTwo, layout } = page
 
   return (
     <article className="pt-16 pb-24">
@@ -74,7 +76,8 @@ export default async function Page({ params: paramsPromise }: Args) {
 
       {draft && <LivePreviewListener />}
 
-      <RenderHero {...hero} />
+      {/*<RenderHero {...hero} />*/}
+      <HerosTwo blocks={heroTwo} />
       <RenderBlocks blocks={layout} />
     </article>
   )

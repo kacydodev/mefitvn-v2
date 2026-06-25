@@ -163,51 +163,120 @@ export interface UserAuthOperations {
 export interface Page {
   id: string;
   title: string;
-  hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: any;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null)
-              | ({
-                  relationTo: 'posts';
-                  value: string | Post;
-                } | null);
-            url?: string | null;
-            label: string;
-            /**
-             * Choose how the link should be rendered.
-             */
-            appearance?: ('default' | 'outline') | null;
+  heroTwo: (
+    | {
+        layout?: ('layoutOne' | 'layoutTwo') | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          id?: string | null;
-        }[]
-      | null;
-    media?: (string | null) | Media;
-    background?: (string | null) | Media;
-    upcomingEvent?: (string | null) | Post;
-  };
+          [k: string]: unknown;
+        } | null;
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+                /**
+                 * Choose how the link should be rendered.
+                 */
+                appearance?: ('default' | 'outline') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        media?: (string | null) | Media;
+        background?: (string | null) | Media;
+        topLeftImage?: (string | null) | Media;
+        topRightImage?: (string | null) | Media;
+        bottomLeftImage?: (string | null) | Media;
+        bottomRightImage?: (string | null) | Media;
+        upcomingEvent?: (string | null) | Post;
+        featuredVideo?: (string | null) | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'layoutOne';
+      }
+    | {
+        layout?: ('layoutOne' | 'layoutTwo') | null;
+        richText?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        links?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: string | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: string | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+                /**
+                 * Choose how the link should be rendered.
+                 */
+                appearance?: ('default' | 'outline') | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        medias?:
+          | {
+              media?: (string | null) | Media;
+              id?: string | null;
+            }[]
+          | null;
+        media?: (string | null) | Media;
+        background?: (string | null) | Media;
+        topLeftImage?: (string | null) | Media;
+        topRightImage?: (string | null) | Media;
+        bottomLeftImage?: (string | null) | Media;
+        bottomRightImage?: (string | null) | Media;
+        upcomingEvent?: (string | null) | Post;
+        featuredVideo?: (string | null) | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'layoutTwo';
+      }
+  )[];
   layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
   meta?: {
     title?: string | null;
@@ -283,7 +352,7 @@ export interface Post {
  */
 export interface Media {
   id: string;
-  alt?: string | null;
+  alt: string;
   caption?: {
     root: {
       type: string;
@@ -299,6 +368,7 @@ export interface Media {
     };
     [k: string]: unknown;
   } | null;
+  thumbnail?: (string | null) | Media;
   folder?: (string | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -1137,29 +1207,77 @@ export interface PayloadMigration {
  */
 export interface PagesSelect<T extends boolean = true> {
   title?: T;
-  hero?:
+  heroTwo?:
     | T
     | {
-        type?: T;
-        richText?: T;
-        links?:
+        layoutOne?:
           | T
           | {
-              link?:
+              layout?: T;
+              richText?: T;
+              links?:
                 | T
                 | {
-                    type?: T;
-                    newTab?: T;
-                    reference?: T;
-                    url?: T;
-                    label?: T;
-                    appearance?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
                   };
+              media?: T;
+              background?: T;
+              topLeftImage?: T;
+              topRightImage?: T;
+              bottomLeftImage?: T;
+              bottomRightImage?: T;
+              upcomingEvent?: T;
+              featuredVideo?: T;
               id?: T;
+              blockName?: T;
             };
-        media?: T;
-        background?: T;
-        upcomingEvent?: T;
+        layoutTwo?:
+          | T
+          | {
+              layout?: T;
+              richText?: T;
+              links?:
+                | T
+                | {
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          newTab?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                          appearance?: T;
+                        };
+                    id?: T;
+                  };
+              medias?:
+                | T
+                | {
+                    media?: T;
+                    id?: T;
+                  };
+              media?: T;
+              background?: T;
+              topLeftImage?: T;
+              topRightImage?: T;
+              bottomLeftImage?: T;
+              bottomRightImage?: T;
+              upcomingEvent?: T;
+              featuredVideo?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   layout?:
     | T
@@ -1334,6 +1452,7 @@ export interface EventsSelect<T extends boolean = true> {
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   caption?: T;
+  thumbnail?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
