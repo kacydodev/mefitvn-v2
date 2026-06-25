@@ -33,5 +33,24 @@ export const populateAuthors: CollectionAfterReadHook = async ({ doc, req, req: 
     }
   }
 
+  if (doc?.updatedBy) {
+    try {
+      const updatedByDoc = await payload.findByID({
+        id: typeof doc.updatedBy === 'object' ? doc.updatedBy?.id : doc.updatedBy,
+        collection: 'users',
+        depth: 0,
+      })
+
+      if (updatedByDoc) {
+        doc.populatedUpdatedBy = {
+          id: updatedByDoc.id,
+          name: updatedByDoc.name,
+        }
+      }
+    } catch {
+      // swallow error
+    }
+  }
+
   return doc
 }

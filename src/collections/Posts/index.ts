@@ -42,6 +42,8 @@ export const Posts: CollectionConfig<'posts'> = {
     title: true,
     slug: true,
     categories: true,
+    updatedBy: true,
+    populatedUpdatedBy: true,
     meta: {
       image: true,
       description: true,
@@ -295,6 +297,15 @@ export const Posts: CollectionConfig<'posts'> = {
       ],
     },
     {
+      name: 'updatedBy',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+      },
+      relationTo: 'users',
+    },
+    {
       name: 'publishedAt',
       type: 'date',
       admin: {
@@ -347,12 +358,41 @@ export const Posts: CollectionConfig<'posts'> = {
         },
       ],
     },
+    {
+      name: 'populatedUpdatedBy',
+      type: 'group',
+      access: {
+        update: () => false,
+      },
+      admin: {
+        disabled: true,
+        readOnly: true,
+      },
+      fields: [
+        {
+          name: 'id',
+          type: 'text',
+        },
+        {
+          name: 'name',
+          type: 'text',
+        },
+      ],
+    },
     slugField(),
   ],
   hooks: {
     afterChange: [revalidatePost],
     afterRead: [populateAuthors],
     afterDelete: [revalidateDelete],
+    beforeChange: [
+      ({ req, data }) => {
+        if (req.user) {
+          data.updatedBy = req.user.id
+        }
+        return data
+      },
+    ],
   },
   versions: {
     drafts: {

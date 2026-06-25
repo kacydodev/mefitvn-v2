@@ -1,5 +1,6 @@
 //@import 'tailwindcss';
 @import '@payloadcms/ui/scss';
+@tailwind utilities;
 
 :root {
   --color-neutral-950: oklch(.145 0 0);
@@ -13,6 +14,10 @@
 body {
   font-size: 14px;
   margin: 0;
+}
+
+button {
+  cursor: pointer;
 }
 
 .debug {
@@ -37,9 +42,19 @@ body {
   }
 }
 
-.custom-widget {
-  padding: 1rem;
-  background: var(--color-neutral-800);
+.posts-count-container {
+  display: flex;
+  flex-direction: column;
+
+  a:has(button) {
+    text-decoration: none;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
 
   .post-count-header {
     display: flex;
