@@ -329,6 +329,7 @@ export interface Post {
     image?: (string | null) | Media;
     description?: string | null;
   };
+  updatedBy?: (string | null) | User;
   publishedAt?: string | null;
   authors?: (string | User)[] | null;
   populatedAuthors?:
@@ -337,6 +338,10 @@ export interface Post {
         name?: string | null;
       }[]
     | null;
+  populatedUpdatedBy?: {
+    id?: string | null;
+    name?: string | null;
+  };
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -1403,9 +1408,16 @@ export interface PostsSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
+  updatedBy?: T;
   publishedAt?: T;
   authors?: T;
   populatedAuthors?:
+    | T
+    | {
+        id?: T;
+        name?: T;
+      };
+  populatedUpdatedBy?:
     | T
     | {
         id?: T;

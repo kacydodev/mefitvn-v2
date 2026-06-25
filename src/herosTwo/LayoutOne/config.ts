@@ -5,10 +5,10 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
-import { linkGroup } from '@/fields/linkGroup'
 import { upcomingEvent } from '@/fields/upcomingEvent'
 import { featuredVideo } from '@/fields/featuredVideo'
 import { layoutOneMedias, layoutTwoMedias } from '@/herosTwo/components/mediasConfig'
+import { linkGroup } from '@/fields/linkGroup/config'
 
 export const layoutOne: Block = {
   slug: 'layoutOne',
