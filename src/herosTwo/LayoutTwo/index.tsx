@@ -41,8 +41,17 @@ export const LayoutTwo: React.FC<Page['heroTwo'][0]> = ({
   }
 
   return (
-    <section className='container grid grid-cols-[1fr_auto_1fr] grid-rows-2 gap-y-24 md:gap-x-2'>
+    <section className='container grid grid-cols-[1fr_auto_1fr] gap-y-24 md:gap-x-4'>
       <article className='col-start-2 row-span-2 md:max-w-80 lg:max-w-146 space-y-8 text-center [&_h1]:md:text-3xl [&_h1]:lg:text-5xl'>
+        {/* Upcoming Event */}
+        {upcomingEvent && (
+          <p className={`
+          flex items-center gap-2 w-fit h-fit rounded-full text-[0.65rem] italic text-xs lg:text-sm
+          before:w-2.25 before:h-2.25 before:rounded-full before:bg-success
+          `}>
+            {`${upcomingEvent.title} in ${eventDate}`}
+          </p>
+        )}
         {richText && <RichText data={richText} enableGutter={false} />}
         {Array.isArray(links) && links.length > 0 && (
           // <ul className='self-center flex md:justify-start gap-4'>
@@ -111,10 +120,10 @@ export const LayoutTwo: React.FC<Page['heroTwo'][0]> = ({
             </ul>
           )}
           {/* Upcoming Event */}
-          {upcomingEvent && (
+          {event && (
             <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-success text-xs italic lg:text-sm debug'>
               <span className='bg-green-500 w-3 h-3 rounded-full'></span>{' '}
-              {`${upcomingEvent?.title} in ${eventDate}`}
+              {`${event?.title} in ${eventDate}`}
             </div>
           )}
         </div>

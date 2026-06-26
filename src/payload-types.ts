@@ -211,7 +211,7 @@ export interface Page {
         topRightImage?: (string | null) | Media;
         bottomLeftImage?: (string | null) | Media;
         bottomRightImage?: (string | null) | Media;
-        upcomingEvent?: (string | null) | Post;
+        upcomingEvent?: (string | null) | Event;
         featuredVideo?: (string | null) | Media;
         id?: string | null;
         blockName?: string | null;
@@ -270,7 +270,7 @@ export interface Page {
         topRightImage?: (string | null) | Media;
         bottomLeftImage?: (string | null) | Media;
         bottomRightImage?: (string | null) | Media;
-        upcomingEvent?: (string | null) | Post;
+        upcomingEvent?: (string | null) | Event;
         featuredVideo?: (string | null) | Media;
         id?: string | null;
         blockName?: string | null;
@@ -521,6 +521,68 @@ export interface User {
     | null;
   password?: string | null;
   collection: 'users';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: string;
+  title: string;
+  eventDate: string;
+  location?: (string | null) | Location;
+  startTime: string;
+  endTime?: string | null;
+  priceVND: number;
+  entryPriceInclusive?: boolean | null;
+  gearPriceInclusive?: boolean | null;
+  eventContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "locations".
+ */
+export interface Location {
+  id: string;
+  title: string;
+  default?: boolean | null;
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -861,68 +923,6 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: string;
-  title: string;
-  eventDate: string;
-  location?: (string | null) | Location;
-  startTime: string;
-  endTime?: string | null;
-  priceVND: number;
-  entryPriceInclusive?: boolean | null;
-  gearPriceInclusive?: boolean | null;
-  eventContent?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
-    | {
-        id?: string | null;
-        name?: string | null;
-      }[]
-    | null;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "locations".
- */
-export interface Location {
-  id: string;
-  title: string;
-  default?: boolean | null;
-  /**
-   * When enabled, the slug will auto-generate from the title field on save and autosave.
-   */
-  generateSlug?: boolean | null;
-  slug: string;
   updatedAt: string;
   createdAt: string;
 }

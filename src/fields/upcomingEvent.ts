@@ -6,11 +6,11 @@ export const upcomingEvent: Field = {
   admin: {
     position: 'sidebar',
   },
-  relationTo: 'posts',
+  relationTo: 'events',
   filterOptions: {
-    type: {
-      in: ['event'],
-    },
+    // type: {
+    //   in: ['event'],
+    // },
     eventDate: {
       greater_than_equal: new Date().toISOString(),
     },

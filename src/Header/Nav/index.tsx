@@ -10,7 +10,7 @@ import { SearchIcon } from 'lucide-react'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || []
-  console.log('navItems: ', navItems)
+  // console.log('navItems: ', navItems)
 
   return (
     <nav className='flex gap-3 items-center z-2'>
