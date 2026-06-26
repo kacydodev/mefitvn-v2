@@ -7,6 +7,7 @@ import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
+import { TrustedBrandsBlock } from '@/blocks/TrustedBrands'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -14,6 +15,8 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  // TODO: convert all block slug to kebab style
+  'trusted-brands': TrustedBrandsBlock,
 }
 
 export const RenderBlocks: React.FC<{
