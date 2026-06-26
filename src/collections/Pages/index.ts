@@ -23,6 +23,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { heroTwo } from '@/herosTwo/config'
+import { TrustedBrands } from '@/blocks/TrustedBrands/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -80,7 +81,8 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              // blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [TrustedBrands],
               required: true,
               admin: {
                 initCollapsed: true,
