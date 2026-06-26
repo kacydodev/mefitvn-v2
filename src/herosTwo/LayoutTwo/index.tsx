@@ -44,12 +44,12 @@ export const LayoutTwo: React.FC<Page['heroTwo'][0]> = ({
     <section className='container grid grid-cols-[1fr_auto_1fr] gap-y-24 md:gap-x-4'>
       <article className='col-start-2 row-span-2 md:max-w-80 lg:max-w-146 space-y-8 text-center [&_h1]:md:text-3xl [&_h1]:lg:text-5xl'>
         {/* Upcoming Event */}
-        {upcomingEvent && (
+        {typeof upcomingEvent === 'object' && (
           <p className={`
           flex items-center gap-2 w-fit h-fit rounded-full text-[0.65rem] italic text-xs lg:text-sm
           before:w-2.25 before:h-2.25 before:rounded-full before:bg-success
           `}>
-            {`${upcomingEvent.title} in ${eventDate}`}
+            {`${upcomingEvent?.title} in ${eventDate}`}
           </p>
         )}
         {richText && <RichText data={richText} enableGutter={false} />}
