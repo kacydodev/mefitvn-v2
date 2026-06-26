@@ -1,13 +1,13 @@
-'use client'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
-import React, { useEffect } from 'react'
+'use client';
+import { useHeaderTheme } from '@/providers/HeaderTheme';
+import React, { useEffect } from 'react';
 
-import type { Page } from '@/payload-types'
+import type { Page } from '@/payload-types';
 
-import { CMSLink } from '@/components/Link'
-import { Media } from '@/components/Media'
-import RichText from '@/components/RichText'
-import { formatDistance } from 'date-fns'
+import { CMSLink } from '@/components/Link';
+import { Media } from '@/components/Media';
+import RichText from '@/components/RichText';
+import { formatDistance } from 'date-fns';
 
 export const LayoutOne: React.FC<Page['heroTwo'][0]> = ({
   links,
@@ -16,17 +16,17 @@ export const LayoutOne: React.FC<Page['heroTwo'][0]> = ({
   richText,
   upcomingEvent,
 }) => {
-  const { setHeaderTheme } = useHeaderTheme()
+  const { setHeaderTheme } = useHeaderTheme();
 
   const eventDate =
     upcomingEvent && typeof upcomingEvent === 'object'
       ? formatDistance(new Date(upcomingEvent.eventDate), new Date())
-      : ''
+      : '';
   // const eventDate = formatDistance(upcomingEvent?.eventDate, new Date())
 
   useEffect(() => {
-    setHeaderTheme('dark')
-  })
+    setHeaderTheme('dark');
+  });
 
   return (
     <section
@@ -45,7 +45,7 @@ export const LayoutOne: React.FC<Page['heroTwo'][0]> = ({
                   <li key={i}>
                     <CMSLink {...link} />
                   </li>
-                )
+                );
               })}
             </ul>
           )}
@@ -62,9 +62,14 @@ export const LayoutOne: React.FC<Page['heroTwo'][0]> = ({
 
       <div className='min-h-[80vh] select-none'>
         {background && typeof background === 'object' && (
-          <Media fill imgClassName='-z-10 object-fit' priority resource={background} />
+          <Media
+            fill
+            imgClassName='-z-10 object-fit'
+            priority
+            resource={background}
+          />
         )}
       </div>
     </section>
-  )
-}
+  );
+};

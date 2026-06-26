@@ -1,19 +1,19 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
-import { authenticated } from '@/access/authenticated'
-import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
-import { Archive } from '@/blocks/ArchiveBlock/config'
-import { CallToAction } from '@/blocks/CallToAction/config'
-import { Content } from '@/blocks/Content/config'
-import { FormBlock } from '@/blocks/Form/config'
-import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { hero } from '@/heros/config'
-import { slugField } from 'payload'
-import { populatePublishedAt } from '@/hooks/populatePublishedAt'
-import { populateUpcomingEvent } from './hooks/populateUpcomingEvent'
-import { generatePreviewPath } from '@/utilities/generatePreviewPath'
-import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
-import { ensureFirstPageTitle } from './hooks/ensureFirstPageTitle'
+import { authenticated } from '@/access/authenticated';
+import { authenticatedOrPublished } from '@/access/authenticatedOrPublished';
+import { Archive } from '@/blocks/ArchiveBlock/config';
+import { CallToAction } from '@/blocks/CallToAction/config';
+import { Content } from '@/blocks/Content/config';
+import { FormBlock } from '@/blocks/Form/config';
+import { MediaBlock } from '@/blocks/MediaBlock/config';
+import { hero } from '@/heros/config';
+import { slugField } from 'payload';
+import { populatePublishedAt } from '@/hooks/populatePublishedAt';
+import { populateUpcomingEvent } from './hooks/populateUpcomingEvent';
+import { generatePreviewPath } from '@/utilities/generatePreviewPath';
+import { revalidateDelete, revalidatePage } from './hooks/revalidatePage';
+import { ensureFirstPageTitle } from './hooks/ensureFirstPageTitle';
 
 import {
   MetaDescriptionField,
@@ -21,9 +21,10 @@ import {
   MetaTitleField,
   OverviewField,
   PreviewField,
-} from '@payloadcms/plugin-seo/fields'
-import { heroTwo } from '@/herosTwo/config'
-import { TrustedBrands } from '@/blocks/TrustedBrands/config'
+} from '@payloadcms/plugin-seo/fields';
+import { heroTwo } from '@/herosTwo/config';
+import { TrustedBrands } from '@/blocks/TrustedBrands/config';
+import { Features } from '@/blocks/Features/config';
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -82,7 +83,7 @@ export const Pages: CollectionConfig<'pages'> = {
               name: 'layout',
               type: 'blocks',
               // blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
-              blocks: [TrustedBrands],
+              blocks: [TrustedBrands, Features],
               required: true,
               admin: {
                 initCollapsed: true,
@@ -145,4 +146,4 @@ export const Pages: CollectionConfig<'pages'> = {
     },
     maxPerDoc: 50,
   },
-}
+};

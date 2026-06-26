@@ -1,11 +1,10 @@
-import { Banner } from '@payloadcms/ui/elements/Banner'
-import { SeedButton } from './SeedButton'
-import './index.scss'
-import { AdminLogo } from '@/components/Logo/AdminLogo'
-import { AdminViewServerProps } from 'payload'
+import { Banner } from '@payloadcms/ui/elements/Banner';
+import { SeedButton } from './SeedButton';
+import './index.scss';
+import { AdminLogo } from '@/components/Logo/AdminLogo';
+import { AdminViewServerProps } from 'payload';
 
-const baseClass = 'before-dashboard'
-
+const baseClass = 'before-dashboard';
 
 const BeforeDashboard = (props: AdminViewServerProps) => {
   return (
@@ -13,7 +12,7 @@ const BeforeDashboard = (props: AdminViewServerProps) => {
       <AdminLogo />
       <h1 className=''>Welcome to your dashboard, {props?.user?.name}!</h1>
     </div>
-  )
+  );
 
   // return (
   //   <div className={baseClass}>
@@ -72,6 +71,6 @@ const BeforeDashboard = (props: AdminViewServerProps) => {
   //     , you can remove it at any time by updating your <strong>payload.config</strong>.
   //   </div>
   // )
-}
+};
 
-export default BeforeDashboard
+export default BeforeDashboard;

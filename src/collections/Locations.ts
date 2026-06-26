@@ -1,7 +1,7 @@
-import { CollectionConfig, slugField } from 'payload'
-import { authenticated } from '@/access/authenticated'
-import { anyone } from '@/access/anyone'
-import { ensureSingleDefault } from '../hooks/ensureSingleDefault'
+import { CollectionConfig, slugField } from 'payload';
+import { authenticated } from '@/access/authenticated';
+import { anyone } from '@/access/anyone';
+import { ensureSingleDefault } from '../hooks/ensureSingleDefault';
 
 export const Locations: CollectionConfig = {
   slug: 'locations',
@@ -33,4 +33,4 @@ export const Locations: CollectionConfig = {
       position: undefined,
     }),
   ],
-}
+};

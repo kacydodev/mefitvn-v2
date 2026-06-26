@@ -1,6 +1,6 @@
-import type { CollectionConfig } from 'payload'
-import { editor } from '@/access/editor'
-import { admin } from '@/access/admin'
+import type { CollectionConfig } from 'payload';
+import { editor } from '@/access/editor';
+import { admin } from '@/access/admin';
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -33,4 +33,4 @@ export const Users: CollectionConfig = {
     },
   ],
   timestamps: true,
-}
+};

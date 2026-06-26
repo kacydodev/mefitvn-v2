@@ -1,21 +1,21 @@
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
-import { PayloadRedirects } from '@/components/PayloadRedirects'
-import configPromise from '@payload-config'
-import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
-import { draftMode } from 'next/headers'
-import React, { cache } from 'react'
-import { homeStatic } from '@/endpoints/seed/home-static'
+import { PayloadRedirects } from '@/components/PayloadRedirects';
+import configPromise from '@payload-config';
+import { getPayload, type RequiredDataFromCollectionSlug } from 'payload';
+import { draftMode } from 'next/headers';
+import React, { cache } from 'react';
+import { homeStatic } from '@/endpoints/seed/home-static';
 
-import { RenderBlocks } from '@/blocks/RenderBlocks'
-import { RenderHero } from '@/heros/RenderHero'
-import { generateMeta } from '@/utilities/generateMeta'
-import PageClient from './page.client'
-import { LivePreviewListener } from '@/components/LivePreviewListener'
-import HerosTwo from '@/herosTwo'
+import { RenderBlocks } from '@/blocks/RenderBlocks';
+import { RenderHero } from '@/heros/RenderHero';
+import { generateMeta } from '@/utilities/generateMeta';
+import PageClient from './page.client';
+import { LivePreviewListener } from '@/components/LivePreviewListener';
+import HerosTwo from '@/herosTwo';
 
 export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise })
+  const payload = await getPayload({ config: configPromise });
   const pages = await payload.find({
     collection: 'pages',
     draft: false,
@@ -25,51 +25,51 @@ export async function generateStaticParams() {
     select: {
       slug: true,
     },
-  })
+  });
 
   const params = pages.docs
     ?.filter((doc) => {
-      return doc.slug !== 'home'
+      return doc.slug !== 'home';
     })
     .map(({ slug }) => {
-      return { slug }
-    })
+      return { slug };
+    });
 
-  return params
+  return params;
 }
 
 type Args = {
   params: Promise<{
-    slug?: string
-  }>
-}
+    slug?: string;
+  }>;
+};
 
 export default async function Page({ params: paramsPromise }: Args) {
-  const { isEnabled: draft } = await draftMode()
-  const { slug = 'home' } = await paramsPromise
+  const { isEnabled: draft } = await draftMode();
+  const { slug = 'home' } = await paramsPromise;
   // Decode to support slugs with special characters
-  const decodedSlug = decodeURIComponent(slug)
-  const url = '/' + decodedSlug
-  let page: RequiredDataFromCollectionSlug<'pages'> | null
+  const decodedSlug = decodeURIComponent(slug);
+  const url = '/' + decodedSlug;
+  let page: RequiredDataFromCollectionSlug<'pages'> | null;
 
   page = await queryPageBySlug({
     slug: decodedSlug,
     limit: 1,
-  })
+  });
 
   // Remove this code once your website is seeded
   if (!page && slug === 'home') {
-    page = homeStatic
+    page = homeStatic;
   }
 
   if (!page) {
-    return <PayloadRedirects url={url} />
+    return <PayloadRedirects url={url} />;
   }
 
-  const { heroTwo, layout } = page
+  const { heroTwo, layout } = page;
 
   return (
-    <article className="pt-16 pb-24">
+    <article className='pt-16 pb-24'>
       <PageClient />
       {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
@@ -80,24 +80,26 @@ export default async function Page({ params: paramsPromise }: Args) {
       <HerosTwo blocks={heroTwo} />
       <RenderBlocks blocks={layout} />
     </article>
-  )
+  );
 }
 
-export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { slug = 'home' } = await paramsPromise
+export async function generateMetadata({
+  params: paramsPromise,
+}: Args): Promise<Metadata> {
+  const { slug = 'home' } = await paramsPromise;
   // Decode to support slugs with special characters
-  const decodedSlug = decodeURIComponent(slug)
+  const decodedSlug = decodeURIComponent(slug);
   const page = await queryPageBySlug({
     slug: decodedSlug,
-  })
+  });
 
-  return generateMeta({ doc: page })
+  return generateMeta({ doc: page });
 }
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
-  const { isEnabled: draft } = await draftMode()
+  const { isEnabled: draft } = await draftMode();
 
-  const payload = await getPayload({ config: configPromise })
+  const payload = await getPayload({ config: configPromise });
 
   const result = await payload.find({
     collection: 'pages',
@@ -110,7 +112,7 @@ const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {
         equals: slug,
       },
     },
-  })
+  });
 
-  return result.docs?.[0] || null
-})
+  return result.docs?.[0] || null;
+});

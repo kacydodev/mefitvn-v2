@@ -1,7 +1,9 @@
-import { RequiredDataFromCollectionSlug } from 'payload'
-import type { PostArgs } from './post-1'
+import { RequiredDataFromCollectionSlug } from 'payload';
+import type { PostArgs } from './post-1';
 
-export const post2: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> = ({
+export const post2: (
+  args: PostArgs,
+) => RequiredDataFromCollectionSlug<'posts'> = ({
   heroImage,
   blockImage,
   author,
@@ -228,5 +230,5 @@ export const post2: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
     },
     relatedPosts: [], // this is populated by the seed script
     title: 'Global Gaze: Beyond the Headlines',
-  }
-}
+  };
+};

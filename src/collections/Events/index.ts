@@ -1,7 +1,7 @@
-import { CollectionConfig, slugField } from 'payload'
-import { editor } from '@/access/editor'
-import { generatePreviewPath } from '@/utilities/generatePreviewPath'
-import { populateAuthors } from '../Posts/hooks/populateAuthors'
+import { CollectionConfig, slugField } from 'payload';
+import { editor } from '@/access/editor';
+import { generatePreviewPath } from '@/utilities/generatePreviewPath';
+import { populateAuthors } from '../Posts/hooks/populateAuthors';
 import {
   BlocksFeature,
   FixedToolbarFeature,
@@ -9,12 +9,12 @@ import {
   HorizontalRuleFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-import { Banner } from '@/blocks/Banner/config'
-import { Code } from '@/blocks/Code/config'
-import { MediaBlock } from '@/blocks/MediaBlock/config'
-import { getSiblingData } from 'payload/shared'
-import { addHours } from 'date-fns'
+} from '@payloadcms/richtext-lexical';
+import { Banner } from '@/blocks/Banner/config';
+import { Code } from '@/blocks/Code/config';
+import { MediaBlock } from '@/blocks/MediaBlock/config';
+import { getSiblingData } from 'payload/shared';
+import { addHours } from 'date-fns';
 
 export const Events: CollectionConfig<'events'> = {
   slug: 'events',
@@ -63,9 +63,9 @@ export const Events: CollectionConfig<'events'> = {
                 },
               },
               limit: 1,
-            })
+            });
 
-            return defaultLocation?.docs?.[0]?.id || null
+            return defaultLocation?.docs?.[0]?.id || null;
           },
           admin: {
             condition: (data) => data?.type === 'event',
@@ -96,9 +96,9 @@ export const Events: CollectionConfig<'events'> = {
             beforeChange: [
               ({ siblingData, value }) => {
                 if (!value && siblingData?.startTime) {
-                  return addHours(new Date(siblingData?.startTime), 2)
+                  return addHours(new Date(siblingData?.startTime), 2);
                 }
-                return value
+                return value;
               },
             ],
           },
@@ -148,7 +148,7 @@ export const Events: CollectionConfig<'events'> = {
             FixedToolbarFeature(),
             InlineToolbarFeature(),
             HorizontalRuleFeature(),
-          ]
+          ];
         },
       }),
     },
@@ -174,9 +174,9 @@ export const Events: CollectionConfig<'events'> = {
         beforeChange: [
           ({ value, req, operation }) => {
             if (operation === 'create' && !value && req.user) {
-              return [req.user.id]
+              return [req.user.id];
             }
-            return value
+            return value;
           },
         ],
       },
@@ -219,4 +219,4 @@ export const Events: CollectionConfig<'events'> = {
     },
     maxPerDoc: 50,
   },
-}
+};

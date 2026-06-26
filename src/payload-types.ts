@@ -277,7 +277,39 @@ export interface Page {
         blockType: 'layoutTwo';
       }
   )[];
-  layout: TrustedBrands[];
+  layout: (
+    | TrustedBrands
+    | {
+        title: string;
+        layout?: ('threeCardLayout' | 'fourCardLayout' | 'sixCardLayout') | null;
+        threeCardLayout?:
+          | {
+              card?: {
+                richText?: {
+                  root: {
+                    type: string;
+                    children: {
+                      type: any;
+                      version: number;
+                      [k: string]: unknown;
+                    }[];
+                    direction: ('ltr' | 'rtl') | null;
+                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                    indent: number;
+                    version: number;
+                  };
+                  [k: string]: unknown;
+                } | null;
+                image?: (string | null) | Media;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'features';
+      }
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -1130,6 +1162,25 @@ export interface PagesSelect<T extends boolean = true> {
     | T
     | {
         'trusted-brands'?: T | TrustedBrandsSelect<T>;
+        features?:
+          | T
+          | {
+              title?: T;
+              layout?: T;
+              threeCardLayout?:
+                | T
+                | {
+                    card?:
+                      | T
+                      | {
+                          richText?: T;
+                          image?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T

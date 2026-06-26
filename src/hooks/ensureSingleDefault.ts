@@ -1,4 +1,4 @@
-import type { CollectionBeforeChangeHook } from 'payload'
+import type { CollectionBeforeChangeHook } from 'payload';
 
 export const ensureSingleDefault: CollectionBeforeChangeHook = async ({
   data,
@@ -23,7 +23,7 @@ export const ensureSingleDefault: CollectionBeforeChangeHook = async ({
           },
         ],
       },
-    })
+    });
 
     if (otherDefaults.docs.length > 0) {
       await Promise.all(
@@ -37,9 +37,9 @@ export const ensureSingleDefault: CollectionBeforeChangeHook = async ({
             req, // Pass req to ensure access control and transaction consistency
           }),
         ),
-      )
+      );
     }
   }
 
-  return data
-}
+  return data;
+};

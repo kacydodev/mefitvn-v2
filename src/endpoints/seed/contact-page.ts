@@ -1,13 +1,13 @@
-import type { Form } from '@/payload-types'
-import { RequiredDataFromCollectionSlug } from 'payload'
+import type { Form } from '@/payload-types';
+import { RequiredDataFromCollectionSlug } from 'payload';
 
 type ContactArgs = {
-  contactForm: Form
-}
+  contactForm: Form;
+};
 
-export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pages'> = ({
-  contactForm,
-}) => {
+export const contact: (
+  args: ContactArgs,
+) => RequiredDataFromCollectionSlug<'pages'> = ({ contactForm }) => {
   return {
     slug: 'contact',
     _status: 'published',
@@ -52,5 +52,5 @@ export const contact: (args: ContactArgs) => RequiredDataFromCollectionSlug<'pag
       },
     ],
     title: 'Contact',
-  }
-}
+  };
+};

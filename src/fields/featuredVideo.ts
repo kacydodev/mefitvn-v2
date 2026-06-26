@@ -1,4 +1,4 @@
-import { Field } from 'payload'
+import { Field } from 'payload';
 
 export const featuredVideo: Field = {
   name: 'featuredVideo',
@@ -6,8 +6,8 @@ export const featuredVideo: Field = {
   relationTo: 'media',
   admin: {
     condition: (data) => {
-      return data?.mimeType?.includes('video')
+      return data?.mimeType?.includes('video');
     },
   },
   maxRows: 1,
-}
+};

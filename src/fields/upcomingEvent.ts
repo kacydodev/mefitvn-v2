@@ -1,4 +1,4 @@
-import { Field } from 'payload'
+import { Field } from 'payload';
 
 export const upcomingEvent: Field = {
   name: 'upcomingEvent',
@@ -15,4 +15,4 @@ export const upcomingEvent: Field = {
       greater_than_equal: new Date().toISOString(),
     },
   },
-}
+};

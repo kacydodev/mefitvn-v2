@@ -1,4 +1,4 @@
-import type { CollectionBeforeValidateHook } from 'payload'
+import type { CollectionBeforeValidateHook } from 'payload';
 
 export const ensureFirstPageTitle: CollectionBeforeValidateHook = async ({
   data,
@@ -10,15 +10,15 @@ export const ensureFirstPageTitle: CollectionBeforeValidateHook = async ({
       collection: 'pages',
       limit: 0,
       depth: 0,
-    })
+    });
 
     if (totalDocs === 0) {
       return {
         ...data,
         title: 'Home',
-      }
+      };
     }
   }
 
-  return data
-}
+  return data;
+};

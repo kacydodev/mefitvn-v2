@@ -1,4 +1,4 @@
-import { Field } from 'payload'
+import { Field } from 'payload';
 
 export const layoutOneMedias: Field = {
   type: 'row',
@@ -22,7 +22,7 @@ export const layoutOneMedias: Field = {
       },
     },
   ],
-}
+};
 
 export const layoutTwoMedias: Field = {
   type: 'row',
@@ -68,4 +68,4 @@ export const layoutTwoMedias: Field = {
       },
     },
   ],
-}
+};

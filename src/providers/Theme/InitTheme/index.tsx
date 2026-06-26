@@ -1,7 +1,7 @@
-import Script from 'next/script'
-import React from 'react'
+import Script from 'next/script';
+import React from 'react';
 
-import { defaultTheme, themeLocalStorageKey } from '../ThemeSelector/types'
+import { defaultTheme, themeLocalStorageKey } from '../ThemeSelector/types';
 
 export const InitTheme: React.FC = () => {
   return (
@@ -43,8 +43,8 @@ export const InitTheme: React.FC = () => {
   })();
   `,
       }}
-      id="theme-script"
-      strategy="beforeInteractive"
+      id='theme-script'
+      strategy='beforeInteractive'
     />
-  )
-}
+  );
+};

@@ -1,14 +1,17 @@
-import { Block, Field } from 'payload'
+import { Block, Field } from 'payload';
 import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-import { upcomingEvent } from '@/fields/upcomingEvent'
-import { featuredVideo } from '@/fields/featuredVideo'
-import { layoutOneMedias, layoutTwoMedias } from '@/herosTwo/components/mediasConfig'
-import { linkGroup } from '@/fields/linkGroup/config'
+} from '@payloadcms/richtext-lexical';
+import { upcomingEvent } from '@/fields/upcomingEvent';
+import { featuredVideo } from '@/fields/featuredVideo';
+import {
+  layoutOneMedias,
+  layoutTwoMedias,
+} from '@/herosTwo/components/mediasConfig';
+import { linkGroup } from '@/fields/linkGroup/config';
 
 export const layoutTwo: Block = {
   slug: 'layoutTwo',
@@ -38,7 +41,7 @@ export const layoutTwo: Block = {
             HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
             FixedToolbarFeature(),
             InlineToolbarFeature(),
-          ]
+          ];
         },
       }),
       label: 'Content',
@@ -64,4 +67,4 @@ export const layoutTwo: Block = {
     upcomingEvent,
     featuredVideo,
   ],
-}
+};

@@ -4,4 +4,4 @@ export const AdminLogo = () => (
     alt='Logo'
     className='h-[50px] w-auto'
   />
-)
+);

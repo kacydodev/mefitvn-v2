@@ -1,13 +1,13 @@
-'use client'
-import { useHeaderTheme } from '@/providers/HeaderTheme'
-import React, { useEffect } from 'react'
+'use client';
+import { useHeaderTheme } from '@/providers/HeaderTheme';
+import React, { useEffect } from 'react';
 
-import type { Page } from '@/payload-types'
+import type { Page } from '@/payload-types';
 
-import { CMSLink } from '@/components/Link'
-import { Media } from '@/components/Media'
-import RichText from '@/components/RichText'
-import { formatDistance } from 'date-fns'
+import { CMSLink } from '@/components/Link';
+import { Media } from '@/components/Media';
+import RichText from '@/components/RichText';
+import { formatDistance } from 'date-fns';
 
 export const HighImpactHero: React.FC<Page['hero']> = ({
   links,
@@ -16,14 +16,14 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   richText,
   upcomingEvent,
 }) => {
-  const { setHeaderTheme } = useHeaderTheme()
-  console.log(upcomingEvent)
+  const { setHeaderTheme } = useHeaderTheme();
+  console.log(upcomingEvent);
 
-  const eventDate = formatDistance(upcomingEvent?.eventDate, new Date())
+  const eventDate = formatDistance(upcomingEvent?.eventDate, new Date());
 
   useEffect(() => {
-    setHeaderTheme('dark')
-  })
+    setHeaderTheme('dark');
+  });
 
   return (
     <section
@@ -42,14 +42,14 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
                   <li key={i}>
                     <CMSLink {...link} />
                   </li>
-                )
+                );
               })}
             </ul>
           )}
           {/* Upcoming Event */}
           <div className='inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-success text-xs italic lg:text-sm debug'>
-            <span className='bg-green-500 w-3 h-3 rounded-full'></span> {upcomingEvent?.title} in{' '}
-            {eventDate}!
+            <span className='bg-green-500 w-3 h-3 rounded-full'></span>{' '}
+            {upcomingEvent?.title} in {eventDate}!
           </div>
         </div>
         <Media resource={media} className='w-72 h-auto' />
@@ -57,9 +57,14 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
 
       <div className='min-h-[80vh] select-none'>
         {background && typeof background === 'object' && (
-          <Media fill imgClassName='-z-10 object-fit' priority resource={background} />
+          <Media
+            fill
+            imgClassName='-z-10 object-fit'
+            priority
+            resource={background}
+          />
         )}
       </div>
     </section>
-  )
-}
+  );
+};

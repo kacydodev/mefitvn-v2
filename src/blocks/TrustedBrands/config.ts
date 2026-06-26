@@ -1,4 +1,4 @@
-import { Block } from 'payload'
+import { Block } from 'payload';
 
 export const TrustedBrands: Block = {
   slug: 'trusted-brands',
@@ -15,4 +15,4 @@ export const TrustedBrands: Block = {
       required: true,
     },
   ],
-}
+};
