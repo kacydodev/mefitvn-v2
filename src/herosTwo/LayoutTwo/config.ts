@@ -30,6 +30,16 @@ export const layoutTwo: Block = {
           value: 'layoutTwo',
         },
       ],
+      hooks: {
+        beforeChange: [
+          ({ value, siblingData }) => {
+            if (value) {
+              siblingData.blockType = value;
+            }
+            return value;
+          },
+        ],
+      },
     },
     {
       name: 'richText',
