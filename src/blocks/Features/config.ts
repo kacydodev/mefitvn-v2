@@ -7,7 +7,6 @@ import {
 } from '@payloadcms/richtext-lexical';
 
 const card: Field = {
-  name: 'card',
   type: 'group',
   fields: [
     {
@@ -44,15 +43,15 @@ export const Features: Block = {
     {
       name: 'layout',
       type: 'select',
-      defaultValue: 'threeCardLayout',
+      defaultValue: 'threeCardsLayout',
       options: [
-        { label: 'Three Cards', value: 'threeCardLayout' },
-        { label: 'Four Cards', value: 'fourCardLayout' },
-        { label: 'Six Cards', value: 'sixCardLayout' },
+        { label: 'Three Cards', value: 'threeCardsLayout' },
+        { label: 'Four Cards', value: 'fourCardsLayout' },
+        { label: 'Six Cards', value: 'sixCardsLayout' },
       ],
     },
     {
-      name: 'threeCardLayout',
+      name: 'threeCardsLayout',
       type: 'array',
       label: {
         singular: 'Card',
@@ -60,7 +59,7 @@ export const Features: Block = {
       },
       admin: {
         condition: (_, siblingData) =>
-          siblingData?.layout === 'threeCardLayout',
+          siblingData?.layout === 'threeCardsLayout',
       },
       minRows: 3,
       maxRows: 3,
