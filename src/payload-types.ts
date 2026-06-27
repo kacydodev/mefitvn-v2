@@ -280,7 +280,7 @@ export interface Page {
   layout: (
     | TrustedBrands
     | {
-        title: string;
+        title?: string | null;
         layout?: ('threeCardsLayout' | 'fourCardsLayout' | 'sixCardsLayout') | null;
         threeCardsLayout?:
           | {

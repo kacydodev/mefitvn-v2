@@ -38,7 +38,6 @@ export const Features: Block = {
     {
       name: 'title',
       type: 'text',
-      required: true,
     },
     {
       name: 'layout',
