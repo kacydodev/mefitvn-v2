@@ -17,7 +17,7 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   upcomingEvent,
 }) => {
   const { setHeaderTheme } = useHeaderTheme();
-  console.log(upcomingEvent);
+  // console.log(upcomingEvent);
 
   const eventDate = formatDistance(upcomingEvent?.eventDate, new Date());
 

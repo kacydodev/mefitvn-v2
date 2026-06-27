@@ -281,27 +281,25 @@ export interface Page {
     | TrustedBrands
     | {
         title: string;
-        layout?: ('threeCardLayout' | 'fourCardLayout' | 'sixCardLayout') | null;
-        threeCardLayout?:
+        layout?: ('threeCardsLayout' | 'fourCardsLayout' | 'sixCardsLayout') | null;
+        threeCardsLayout?:
           | {
-              card?: {
-                richText?: {
-                  root: {
-                    type: string;
-                    children: {
-                      type: any;
-                      version: number;
-                      [k: string]: unknown;
-                    }[];
-                    direction: ('ltr' | 'rtl') | null;
-                    format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                    indent: number;
+              richText?: {
+                root: {
+                  type: string;
+                  children: {
+                    type: any;
                     version: number;
-                  };
-                  [k: string]: unknown;
-                } | null;
-                image?: (string | null) | Media;
-              };
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              } | null;
+              image?: (string | null) | Media;
               id?: string | null;
             }[]
           | null;
@@ -1167,15 +1165,11 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               layout?: T;
-              threeCardLayout?:
+              threeCardsLayout?:
                 | T
                 | {
-                    card?:
-                      | T
-                      | {
-                          richText?: T;
-                          image?: T;
-                        };
+                    richText?: T;
+                    image?: T;
                     id?: T;
                   };
               id?: T;
